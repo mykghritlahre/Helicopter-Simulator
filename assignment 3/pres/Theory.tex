@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Theoretical Reformulations}
+  \textbf{Defining blade element Geometrically}
+  \begin{figure}
+      \centering
+      \includegraphics[width=0.7\linewidth]{../images/Schematics.jpg}
+      \caption{Visualisation of Airfoil plane and Blade plane}
+      \label{fig: Schematics}
+  \end{figure}
+\end{frame}
+\begin{frame}{Theoretical Reformulations}
+    \textbf{Significance of Geometric approach}
+    \begin{itemize}
+        \item Every blade is given a blade plane normal $\hat{n}(\psi,\beta)$ and airfoil plane normal $\hat{r}(\psi,\beta)$ (towards the hub).
+        \item The location of the blade is given by azimuth position $\psi$ and coning angle $\beta$
+        \item Local relative velocity field projected onto the airfoil plane for sectional lift and drag computations as in figure 
+        \ref{fig: Schematics}
+        \item Aerodynamic force resolved along $\hat{n}$ and $\hat{n}\times\hat{r}$ as $dT$ and $dF_{\tau}$
+        \item Airfoil pitch $\theta$ defined w.r.t blade plane
+    \end{itemize}
+\end{frame}
+\begin{frame}{Theoretical Reformulations}
+    \textbf{Vectors defined in hub frame}
+    \begin{columns}[T] % align columns to the top
+        % First column for the image
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.8\linewidth]{../images/Vectors.png}
+                %\caption{Enter Caption}
+                %\label{fig:enter-label}
+            \end{figure}
+        \end{column}
+        
+        % Second column for the text
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Figure given hub frame
+                \item Blade normal given by
+                $$
+                \hat{n}(\psi,\beta) = \begin{bmatrix}
+                    \sin(\beta)\cos(\psi) \\
+                    \sin(\beta)\sin(\psi) \\
+                    \cos(\beta)
+                \end{bmatrix}
+                $$
+                \item Airfoil Plane normal given by 
+                $$
+                \hat{r}(\psi,\beta) = \begin{bmatrix}
+                    \cos(\beta)\cos(\psi) \\
+                    \cos(\beta)\sin(\psi) \\
+                    -\sin(\beta)
+                \end{bmatrix}
+                $$
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+\begin{frame}{Aerodynamics Modelling}
+    Assume ambient velocity field $\vec{V}(r,\psi,z)$ over the rotor disk. The aerodynamic loads on a blade depends on the velocity faced by it projected onto the blade plane.
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\linewidth]{../images/Projection.png}
+        \caption{Projection of velocity}
+    \end{figure}
+\end{frame}
+\begin{frame}{Aerodynamics Modelling}
+   The velocity relative to rotating blade is given by 
+   \begin{equation*}
+\vec{V}_{rel} = \vec{V} + \Omega r (\hat{n} \times \hat{r})
+   \end{equation*}
+   where $\Omega = \dot{\psi}$ and its projecting onto the airfoil plane is
+   \begin{equation*}
+       \vec{V}_{proj} = \vec{V}_{rel} - \hat{r}(\vec{V}_{rel}\cdot \hat{r})
+   \end{equation*}
+   Hence geometrically, the angle of attack faced by the airfoil is  
+   \begin{equation*}
+       \alpha = \theta + \underbrace{\tan^{-1}\left(\frac{\vec{V}_{proj}\cdot \hat{n}}{\vec{V}_{proj}\cdot (\hat{n}\times \hat{r})}\right)}_{ = - \phi}
+   \end{equation*}
+   Furthermore by neglecting the 3d flow effects, we compute the aerodynamic coefficients and integrate the forces and moments.
+\end{frame}
+\begin{frame}{Blade Flapping}
+    For a given flow field and blade location $\beta,\psi$ of a blade, we can compute the hinge moment acting it given by
+    $$M_{\text{H}}(\beta,\psi) =\int_{R_{root}}^{R_{tip}}(\vec{F}_{\text{aero}}\cdot \hat{n}) r dr$$
+    Where $\vec{F}_{\text{aero}}$ is the aerodynamic load on the blade. This moment is counteracted by the torque due to centrifugal forces given by $M_{c}(\beta) = \int r^2 \Omega^2 \cos^2(\beta)\sin(\beta)\mathbf{dm}$. This results in the blade flapping being stabilised at an equilibrium $\beta_{eq}(\psi)$  which is a solution of $M_H(\beta,\psi) - M_c(\beta) =0$, at a given azimuthal location. 
+\end{frame}
+\begin{frame}{Computation of Induced Velocity Field}
+    The total velocity field inclusive of induced velocity field is computed iteratively for a main rotor setup as follows.
+    \begin{itemize}
+        \item Compute thrust with a nominal guess for induced inflow ratio.
+        \item From thrust coefficient, compute the Glauert induced inflow ratio $\lambda_{i,G}$
+        \item Construct the spatially varying induced velocity field and append it to the total velocity field (with learning rate)
+        \item Iterate until thrust converges.
+    \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%

@@ -1,0 +1,28 @@
+
+\begin{frame}{Assumptions and Data}
+\textbf{Physics Assumptions/Data}
+\begin{itemize}
+  \item The flight simulator updates parameters, forces, and moments every second.
+  \item Gravity remains constant with altitude ($g = 9.81 \ m/s^2 \ \widehat{Z}_{hel}$).
+\end{itemize}
+
+\textbf{Environmental Assumptions/Data}
+\begin{itemize}
+  \item We apply the ISA (International Standard Atmosphere) model, linearly interpolating values based on helicopter altitude.
+\end{itemize}
+
+\textbf{Flight Condition Assumptions/Data}
+\begin{itemize}
+  \item The helicopter is in level flight at a constant altitude with no wind.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Vehicle and Flight Condition Assumptions}
+\textbf{Vehicle Assumptions/Data}
+\begin{itemize}
+  \item Inviscid, compressible $\left(\frac{1}{\sqrt{1-M_{\infty}^2}}\right)$ flow is assumed for the rotors.
+  \item The engine is Turbotech, using Jet A1 fuel with a calorific value of $43.124 \ MJ/kg$ (based on a given data model).
+  \item NACA0012 C$_{L}$ vs $\alpha$ $(0-360^\circ)$ data was obatined using WebPlotDigitizer from a given graph.
+  \item Mass of vehicle is $50$ kg fuel, $50$ kg payload and $100$ kg structural weight.
+\end{itemize}
+\end{frame}
