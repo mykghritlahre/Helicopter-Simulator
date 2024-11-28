@@ -1,0 +1,91 @@
+title = "Mission Parameters"
+plot = true                  # create plots?
+
+[mission]
+# Type of mission segment: type = "takeoff", "vertical_climb", "steady_climb", "level", "steady_descent", "hover", "vertical_descent", "change_payload"
+# Fuel capacity [kg] setup once in "takeoff" segment -- mission.1: fuel = float
+# Payload [kg] setup in "takeoff" segment but can be updated in "change_payload": payload = float
+# Altitude [m] setup once in "takeoff" segment then updated in other segments as per requirements -- mission.1: altitude = float
+# Climb rate [m/s] setup in "vertical_climb" and "steady_climb" segments. Positive value means climb, negative means descent: climb_rate = float
+# Forward velocity [m/s] setup in "steady_climb" and "level_flight" segments: forward_velocity = float
+# Distance [km] setup in "level_flight" segment: distance = float
+# Wind [m/s] setup in segments that have wind, else its taken 0. Positive is tail wind, negative is head wind: wind = float
+# Duration [sec] setup in "hover" segment: duration = float
+
+[mission.1]
+type = "takeoff"
+fuel = 50.0
+payload = 50.0
+altitude = 9000
+
+[mission.2]
+type = "vertical_climb"
+altitude = 9020
+climb_velocity = 1
+
+[mission.3]
+type = "steady_climb"
+altitude = 9500
+climb_velocity = 4
+forward_velocity = 9
+wind = 5.5
+
+[mission.4]
+type = "level_flight"
+altitude = 9500
+distance = 5
+forward_velocity = 14
+wind = 5.5
+
+[mission.5]
+type = "steady_descent"
+altitude = 9300
+climb_velocity = -2
+forward_velocity = 9
+wind = 5.5
+
+[mission.6]
+type = "hover"
+altitude = 9300
+duration = 60
+
+[mission.7]
+type = "vertical_descent"
+altitude = 9290
+climb_velocity = -0.5
+
+[mission.8]
+type = "change_payload"
+altitude = 9290
+payload = 0
+
+[mission.9]
+type = "vertical_climb"
+altitude = 9300
+climb_velocity = 1
+
+[mission.10]
+type = "steady_climb"
+altitude = 9500
+climb_velocity = 4
+forward_velocity = 9
+wind = -5.5
+
+[mission.11]
+type = "level_flight"
+altitude = 9500
+distance = 5
+forward_velocity = 14
+wind = -5.5
+
+[mission.12]
+type = "steady_descent"
+altitude = 9020
+climb_velocity = -0.5
+forward_velocity = 9
+wind = -5.5
+
+[mission.13]
+type = "vertical_descent"
+altitude = 9000
+climb_velocity = -0.5

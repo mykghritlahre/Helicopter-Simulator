@@ -1,0 +1,62 @@
+title = "Helicopter Parameters"
+
+[helicopter]
+empty_weight = 100.0  # Empty weight [kg]
+flat_plate_area = 0.4 # Flat plate area [m^2]
+alpha_fuselage = 1.0  # Fuselage angle of attack [deg]
+fuel_density = 0.845  # Density of fuel [kg/l]
+
+[rotors]
+cg_to_tail_rotor = [-4.75, 0, 1] # Distance from CG to tail rotor (x, y, z) [m]
+cg_to_main_rotor = [0.0, 0, 1.5] # Distance from CG to main rotor (x, y, z) [m]
+
+# Cp = K * Ct * lambda_i + 1/2 * f/A * mu^3 + sigma * Cd0 / 8 (1 + 4.6 * mu^2) 
+K = 25.848762424659647
+Cd0 = 0.4834611267203279
+four_point_six = 139.52059053407987
+# Cp_tail_rotor = m * Cp_main_rotor + c
+m = 3.1310317931688667
+c = 0.01328410441945136
+
+[rotors.main]
+nblades = 3       # Number of blades
+radius = 2.5      # Radius of the blades [m]
+root_cutout = 0.1 # Root cutout [m]
+root_chord = 0.2  # Root chord length (used for linear taper) [m]
+tip_chord = 0.1   # Tip chord length (used for linear taper) [m]
+twist = 0         # Twist angle per meter [deg/m]
+omega = 100.0     # Rotor speed [rad/s]
+
+
+[rotors.tail]
+nblades = 2         # Number of blades
+radius = 0.5        # Radius of the blades [m]
+root_cutout = 0.025 # Root cutout [m]
+root_chord = 0.05   # Root chord length (used for linear taper) [m]
+tip_chord = 0.05    # Tip chord length (used for linear taper) [m]
+twist = 0           # Twist angle per meter [deg/m]
+omega = 400.0       # Rotor speed [rad/s]
+
+[stabilizers]
+cg_to_horizontal_stabilizer = [
+    -3.5,
+    0,
+    1,
+] # Distance from CG to horizontal stabilizer (x, y, z) [m]
+cg_to_vertical_stabilizer = [
+    -4.75,
+    0,
+    1,
+] # Distance from CG to vertical stabilizer (x, y, z) [m]
+
+[stabilizers.horizontal]
+type = "horizontal"
+span = 0.8          # Span of the stabilizer [m]
+root_chord = 0.2    # Root chord length (used for linear taper) [m]
+tip_chord = 0.2     # Tip chord length (used for linear taper) [m]
+
+[stabilizers.vertical]
+type = "vertical"
+span = 0.7        # Span of the stabilizer [m]
+root_chord = 0.3  # Root chord length (used for linear taper) [m]
+tip_chord = 0.3   # Tip chord length (used for linear taper) [m]
